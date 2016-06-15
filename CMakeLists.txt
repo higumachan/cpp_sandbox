@@ -5,6 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=native")
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO)
 add_definitions(-D_ELPP_STACKTRACE_ON_CRASH=1)
 add_definitions(-D_ELPP_PERFORMANCE_MICROSECONDS=1)
+add_definitions(-DDEBUG=1)
 
 ###############################
 # set output path
@@ -50,4 +51,12 @@ endif()
 
 ADD_SUBDIRECTORY("exe")
 
-execute_process(COMMAND git log | head)
+execute_process(
+	COMMAND git log -n 1 --oneline --no-decorate
+	OUTPUT_VARIABLE GIT_LOG
+)
+string(STRIP ${GIT_LOG} GIT_LOG)
+
+message(STATUS "cmake_binary_dir:${CMAKE_BINARY_DIR}")
+
+configure_file ( "version.hpp.in" "version.hpp" )

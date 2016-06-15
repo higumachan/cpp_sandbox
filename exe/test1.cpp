@@ -1,6 +1,12 @@
 #include <boost/optional.hpp>
 #include <iostream>
 
+template<typename Type>
+struct Wrapper : Type
+{
+
+};
+
 void f(const boost::optional<int>& a)
 {
     if (a){
@@ -18,4 +24,7 @@ int main(void)
 
     f(a);
     f(b);
+
+    Wrapper<float> c;
+    
 }

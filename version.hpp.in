@@ -1,0 +1,1 @@
+#define VERSION_GIT_HISTORY "@GIT_LOG@"
